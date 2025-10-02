@@ -1,2 +1,2 @@
-# molehiya-legal
-Legal documents for the molehiya Discord bot
+# lumnia-legal
+Legal documents for the Lumnia Discord bot
