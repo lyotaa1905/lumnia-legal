@@ -2,54 +2,1418 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service – Lumnia</title>
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Terms of Service for Lumnia, a Discord moderation bot for durable warning records, case history, and reliable moderation logs."
+    >
+
+    <meta name="theme-color" content="#05070d">
+
+    <title>Terms of Service | Lumnia</title>
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.7;
-            padding: 40px;
-            max-width: 800px;
-            margin: auto;
-            background-color: #f9f9f9;
-            color: #333;
+        :root {
+            --bg: #05070d;
+            --bg-soft: #080c15;
+            --surface: rgba(12, 18, 31, 0.68);
+            --surface-strong: rgba(14, 21, 36, 0.9);
+            --border: rgba(148, 185, 255, 0.13);
+            --border-hover: rgba(150, 200, 255, 0.28);
+
+            --text: #f4f7ff;
+            --text-soft: #a7b0c2;
+            --text-muted: #737e92;
+
+            --blue: #78aaff;
+            --blue-bright: #b8d7ff;
+            --cyan: #79e6ff;
+
+            --glow: rgba(88, 151, 255, 0.2);
+
+            --max-width: 1120px;
+            --content-width: 790px;
+            --radius: 22px;
         }
-        h1, h2 {
-            color: #2e8b57;
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            color: var(--text);
+            background:
+                radial-gradient(
+                    circle at 50% -10%,
+                    rgba(61, 116, 210, 0.17),
+                    transparent 34rem
+                ),
+                radial-gradient(
+                    circle at 90% 25%,
+                    rgba(45, 91, 180, 0.08),
+                    transparent 25rem
+                ),
+                var(--bg);
+
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -2;
+
+            background-image:
+                linear-gradient(
+                    rgba(255, 255, 255, 0.018) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255, 255, 255, 0.018) 1px,
+                    transparent 1px
+                );
+
+            background-size: 60px 60px;
+
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    rgba(0, 0, 0, 0.7),
+                    transparent 72%
+                );
+        }
+
+        a {
+            color: inherit;
+        }
+
+        /* -----------------------------
+           Navigation
+        ----------------------------- */
+
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+
+            background: rgba(5, 7, 13, 0.72);
+
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .nav-inner {
+            width: min(calc(100% - 40px), var(--max-width));
+            height: 72px;
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+
+            text-decoration: none;
+            font-weight: 750;
+            letter-spacing: -0.02em;
+        }
+
+        .brand-mark {
+            position: relative;
+            width: 29px;
+            height: 29px;
+            transform: rotate(45deg);
+        }
+
+        .brand-mark::before,
+        .brand-mark::after {
+            content: "";
+            position: absolute;
+            inset: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 2px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff,
+                    #8fbfff 48%,
+                    #507ac8
+                );
+
+            box-shadow:
+                0 0 16px rgba(112, 169, 255, 0.55);
+        }
+
+        .brand-mark::before {
+            width: 8px;
+            height: 28px;
+        }
+
+        .brand-mark::after {
+            width: 28px;
+            height: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: var(--text-soft);
+            text-decoration: none;
+            font-size: 0.9rem;
+
+            transition:
+                color 160ms ease,
+                transform 160ms ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+            transform: translateY(-1px);
+        }
+
+        .nav-links .active {
+            color: var(--text);
+        }
+
+        /* -----------------------------
+           Hero
+        ----------------------------- */
+
+        .hero {
+            position: relative;
+
+            width: min(calc(100% - 40px), var(--max-width));
+            min-height: 530px;
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            perspective: 1000px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+
+            max-width: 760px;
+            padding: 100px 0 80px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            margin-bottom: 22px;
+            padding: 7px 12px;
+
+            color: #a9c8fa;
+
+            border: 1px solid rgba(129, 174, 255, 0.17);
+            border-radius: 999px;
+
+            background: rgba(78, 125, 206, 0.07);
+
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #82b4ff;
+
+            box-shadow:
+                0 0 12px rgba(108, 168, 255, 0.9);
+        }
+
+        h1 {
+            margin: 0;
+
+            font-size: clamp(3rem, 8vw, 6.4rem);
+            line-height: 0.98;
+            letter-spacing: -0.065em;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #ffffff 12%,
+                    #d7e5ff 62%,
+                    #8ba4cc
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-description {
+            max-width: 620px;
+            margin: 28px auto 0;
+
+            color: var(--text-soft);
+
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            line-height: 1.8;
+        }
+
+        .updated {
+            margin-top: 20px;
+
+            color: var(--text-muted);
+
+            font-size: 0.83rem;
+        }
+
+        /* -----------------------------
+           3D crystal
+        ----------------------------- */
+
+        .crystal-scene {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+
+            width: 520px;
+            height: 520px;
+
+            transform:
+                translate(-50%, -50%)
+                rotateX(var(--rotate-x, 0deg))
+                rotateY(var(--rotate-y, 0deg));
+
+            transform-style: preserve-3d;
+            pointer-events: none;
+
+            transition: transform 180ms ease-out;
+
+            opacity: 0.48;
+        }
+
+        .crystal-glow {
+            position: absolute;
+            inset: 15%;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(86, 148, 255, 0.16),
+                    rgba(86, 148, 255, 0.04) 42%,
+                    transparent 70%
+                );
+
+            filter: blur(22px);
+
+            transform: translateZ(-80px);
+        }
+
+        .crystal {
+            position: absolute;
+            inset: 50%;
+            width: 145px;
+            height: 145px;
+
+            transform:
+                translate(-50%, -50%)
+                rotate(45deg)
+                translateZ(-35px);
+
+            border: 1px solid rgba(173, 209, 255, 0.12);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255, 255, 255, 0.035),
+                    rgba(89, 149, 255, 0.07),
+                    rgba(255, 255, 255, 0.01)
+                );
+
+            box-shadow:
+                0 0 70px rgba(64, 124, 230, 0.13),
+                inset 0 0 40px rgba(118, 169, 255, 0.05);
+        }
+
+        .crystal::before,
+        .crystal::after {
+            content: "";
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(255, 255, 255, 0.12),
+                    rgba(104, 163, 255, 0.025)
+                );
+
+            border: 1px solid rgba(175, 211, 255, 0.1);
+
+            transform: translate(-50%, -50%);
+        }
+
+        .crystal::before {
+            width: 26px;
+            height: 260px;
+        }
+
+        .crystal::after {
+            width: 260px;
+            height: 26px;
+        }
+
+        /* -----------------------------
+           Main legal content
+        ----------------------------- */
+
+        .legal-shell {
+            width: min(calc(100% - 40px), var(--max-width));
+            margin: 0 auto 100px;
+
+            display: grid;
+            grid-template-columns: 220px minmax(0, var(--content-width));
+            gap: 70px;
+
+            justify-content: center;
+        }
+
+        .toc {
+            position: sticky;
+            top: 105px;
+            align-self: start;
+        }
+
+        .toc-label {
+            margin-bottom: 14px;
+
+            color: var(--text-muted);
+
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+        }
+
+        .toc a {
+            display: block;
+
+            padding: 7px 0;
+
+            color: #778398;
+            text-decoration: none;
+
+            font-size: 0.82rem;
+            line-height: 1.35;
+
+            transition:
+                color 150ms ease,
+                transform 150ms ease;
+        }
+
+        .toc a:hover {
+            color: #dce8ff;
+            transform: translateX(3px);
+        }
+
+        .legal-content {
+            min-width: 0;
+        }
+
+        .intro-card {
+            position: relative;
+            overflow: hidden;
+
+            margin-bottom: 22px;
+            padding: 30px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(18, 27, 46, 0.78),
+                    rgba(8, 12, 21, 0.72)
+                );
+
+            box-shadow:
+                0 22px 70px rgba(0, 0, 0, 0.22);
+
+            transform-style: preserve-3d;
+
+            transition:
+                transform 180ms ease,
+                border-color 180ms ease;
+        }
+
+        .intro-card::before {
+            content: "";
+
+            position: absolute;
+            width: 250px;
+            height: 250px;
+
+            top: -150px;
+            right: -90px;
+
+            border-radius: 50%;
+
+            background: rgba(81, 145, 255, 0.13);
+            filter: blur(55px);
+
+            pointer-events: none;
+        }
+
+        .intro-card strong {
+            color: #eaf2ff;
+        }
+
+        .section {
+            position: relative;
+
+            padding: 34px 4px;
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+            scroll-margin-top: 100px;
+        }
+
+        .section-header {
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+
+            margin-bottom: 18px;
+        }
+
+        .section-number {
+            flex: 0 0 auto;
+
+            margin-top: 4px;
+
+            color: #7098d8;
+
+            font-family:
+                "SFMono-Regular",
+                Consolas,
+                "Liberation Mono",
+                monospace;
+
+            font-size: 0.73rem;
+            font-weight: 700;
+        }
+
+        h2 {
+            margin: 0;
+
+            color: #f0f5ff;
+
+            font-size: 1.22rem;
+            letter-spacing: -0.02em;
+        }
+
+        p,
+        li {
+            color: var(--text-soft);
+            font-size: 0.96rem;
+            line-height: 1.85;
+        }
+
+        p {
+            margin: 0 0 15px;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        ul {
+            margin: 12px 0 16px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin: 7px 0;
+            padding-left: 4px;
+        }
+
+        .legal-content a {
+            color: #a8caff;
+
+            text-decoration-color: rgba(168, 202, 255, 0.3);
+            text-underline-offset: 3px;
+        }
+
+        .legal-content a:hover {
+            color: #d8e8ff;
+        }
+
+        .notice {
+            margin-top: 18px;
+            padding: 17px 19px;
+
+            border: 1px solid rgba(115, 165, 255, 0.13);
+            border-radius: 14px;
+
+            background: rgba(78, 126, 207, 0.055);
+
+            color: #9eabc0;
+
+            font-size: 0.88rem;
+            line-height: 1.7;
+        }
+
+        /* -----------------------------
+           Contact
+        ----------------------------- */
+
+        .contact-card {
+            margin-top: 42px;
+            padding: 30px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(15, 23, 39, 0.85),
+                    rgba(8, 12, 21, 0.72)
+                );
+        }
+
+        .contact-card h2 {
+            margin-bottom: 12px;
+        }
+
+        /* -----------------------------
+           Footer
+        ----------------------------- */
+
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.055);
+        }
+
+        .footer-inner {
+            width: min(calc(100% - 40px), var(--max-width));
+            min-height: 115px;
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+
+            color: var(--text-muted);
+
+            font-size: 0.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 22px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-soft);
+        }
+
+        /* -----------------------------
+           Responsive
+        ----------------------------- */
+
+        @media (max-width: 900px) {
+            .legal-shell {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .toc {
+                display: none;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .nav-inner {
+                height: 64px;
+            }
+
+            .nav-links {
+                gap: 16px;
+            }
+
+            .nav-links a {
+                font-size: 0.82rem;
+            }
+
+            .nav-links a:first-child {
+                display: none;
+            }
+
+            .hero {
+                min-height: 470px;
+            }
+
+            .hero-content {
+                padding: 80px 0 65px;
+            }
+
+            h1 {
+                font-size: clamp(2.8rem, 16vw, 4.5rem);
+            }
+
+            .crystal-scene {
+                width: 380px;
+                height: 380px;
+            }
+
+            .intro-card,
+            .contact-card {
+                padding: 23px;
+            }
+
+            .section {
+                padding: 29px 2px;
+            }
+
+            .section-header {
+                gap: 12px;
+            }
+
+            .footer-inner {
+                padding: 28px 0;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        /* -----------------------------
+           Accessibility
+        ----------------------------- */
+
+        :focus-visible {
+            outline: 2px solid #8bb8ff;
+            outline-offset: 4px;
+            border-radius: 4px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .crystal-scene {
+                transform: translate(-50%, -50%) !important;
+            }
         }
     </style>
 </head>
+
 <body>
-    <h1>Terms of Service</h1>
-    <p>Last updated: June 22, 2025</p>
 
-    <h2>1. Acceptance of Terms</h2>
-    <p>By using the Lumnia Discord bot (“Service”), you agree to be bound by these Terms of Service (“Terms”). If you do not agree with any part of the Terms, you must not use the Service.</p>
+    <nav class="nav" aria-label="Primary navigation">
+        <div class="nav-inner">
 
-    <h2>2. Description of Service</h2>
-    <p>Lumnia is a Discord bot that provides gamified server features such as coin rewards, role markets, missions, and activity-based bonuses.</p>
+            <a class="brand" href="/" aria-label="Lumnia home">
+                <span class="brand-mark" aria-hidden="true"></span>
+                <span>Lumnia</span>
+            </a>
 
-    <h2>3. Use of the Service</h2>
-    <ul>
-        <li>You must follow all applicable Discord Terms of Service and Community Guidelines.</li>
-        <li>You may not use Lumnia for illegal or harmful activities.</li>
-        <li>You must not attempt to exploit, reverse-engineer, or abuse the bot’s functionality.</li>
-    </ul>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a class="active" href="/terms">Terms</a>
+                <a href="/privacy">Privacy</a>
+            </div>
 
-    <h2>4. Data Collection</h2>
-    <p>We store Discord user IDs, server IDs, message timestamps, activity durations, and role-related actions to enable gamified features such as coin rewards, daily login bonuses, and market interactions.</p>
+        </div>
+    </nav>
 
-    <h2>5. Termination</h2>
-    <p>We reserve the right to suspend or terminate access to Lumnia at any time, with or without notice, for any reason, including violation of these Terms.</p>
 
-    <h2>6. Disclaimer</h2>
-    <p>The Service is provided “as is.” We make no warranties regarding uptime, data loss, or feature guarantees.</p>
+    <header class="hero" id="top">
 
-    <h2>7. Changes to Terms</h2>
-    <p>We may update these Terms at any time. Continued use of the bot after changes implies acceptance of the updated Terms.</p>
+        <div class="crystal-scene" id="crystalScene" aria-hidden="true">
+            <div class="crystal-glow"></div>
+            <div class="crystal"></div>
+        </div>
 
-    <h2>8. Contact</h2>
-    <p>If you have any questions or concerns, you can reach out to the development team via Discord or email.</p>
+        <div class="hero-content">
+
+            <div class="eyebrow">
+                <span class="eyebrow-dot"></span>
+                Legal
+            </div>
+
+            <h1>Terms of Service</h1>
+
+            <p class="hero-description">
+                The rules and conditions governing access to and use of
+                Lumnia.
+            </p>
+
+            <div class="updated">
+                Last updated: September 9, 2026
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <main class="legal-shell">
+
+        <aside class="toc" aria-label="Terms contents">
+            <div class="toc-label">On this page</div>
+
+            <a href="#acceptance">01. Acceptance</a>
+            <a href="#about">02. About Lumnia</a>
+            <a href="#eligibility">03. Eligibility</a>
+            <a href="#installation">04. Installation</a>
+            <a href="#acceptable-use">05. Acceptable Use</a>
+            <a href="#administration">06. Server Administration</a>
+            <a href="#records">07. Moderation Records</a>
+            <a href="#privacy">08. Privacy & Data</a>
+            <a href="#availability">09. Availability</a>
+            <a href="#changes-service">10. Service Changes</a>
+            <a href="#termination">11. Termination</a>
+            <a href="#intellectual-property">12. Intellectual Property</a>
+            <a href="#third-parties">13. Third Parties</a>
+            <a href="#disclaimer">14. Disclaimer</a>
+            <a href="#liability">15. Liability</a>
+            <a href="#terms-changes">16. Terms Changes</a>
+            <a href="#contact">17. Contact</a>
+        </aside>
+
+
+        <article class="legal-content">
+
+            <div class="intro-card" data-tilt>
+                <p>
+                    These Terms of Service ("Terms") govern your access to
+                    and use of <strong>Lumnia</strong>, including the Lumnia
+                    Discord application, bot features, websites, and related
+                    services that reference these Terms (collectively, the
+                    "Service").
+                </p>
+
+                <p>
+                    By installing, authorizing, accessing, or using the
+                    Service, you agree to these Terms. If you do not agree,
+                    do not install, authorize, access, or use Lumnia.
+                </p>
+            </div>
+
+
+            <section class="section" id="acceptance">
+                <div class="section-header">
+                    <span class="section-number">01</span>
+                    <h2>Acceptance of Terms</h2>
+                </div>
+
+                <p>
+                    By accessing or using Lumnia, you agree to be bound by
+                    these Terms and any policies expressly incorporated into
+                    them.
+                </p>
+
+                <p>
+                    If you use Lumnia on behalf of a Discord server,
+                    community, organization, or other entity, you represent
+                    that you have the authority necessary to use or
+                    configure the Service on its behalf.
+                </p>
+            </section>
+
+
+            <section class="section" id="about">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <h2>About Lumnia</h2>
+                </div>
+
+                <p>
+                    Lumnia is a Discord moderation application designed to
+                    help authorized server moderators create and maintain
+                    warning records, review moderation case history, and
+                    deliver moderation logs.
+                </p>
+
+                <p>
+                    Features may change as Lumnia is developed. Certain
+                    features may be experimental, limited, modified, or
+                    removed without guaranteeing continued availability.
+                </p>
+            </section>
+
+
+            <section class="section" id="eligibility">
+                <div class="section-header">
+                    <span class="section-number">03</span>
+                    <h2>Eligibility and Discord</h2>
+                </div>
+
+                <p>
+                    You may use Lumnia only if you are permitted to use
+                    Discord and the Service under applicable law and the
+                    rules that apply to your Discord account.
+                </p>
+
+                <p>
+                    Your use of Discord remains governed by Discord's own
+                    terms, policies, and community rules. Lumnia does not
+                    replace or modify your obligations to Discord.
+                </p>
+            </section>
+
+
+            <section class="section" id="installation">
+                <div class="section-header">
+                    <span class="section-number">04</span>
+                    <h2>Installation and Authorization</h2>
+                </div>
+
+                <p>
+                    You must have appropriate authority within a Discord
+                    server before installing, authorizing, or configuring
+                    Lumnia for that server.
+                </p>
+
+                <p>
+                    Server administrators are responsible for deciding which
+                    permissions are granted to Lumnia and which members are
+                    permitted to use moderation functionality.
+                </p>
+
+                <p>
+                    You must not attempt to obtain permissions for Lumnia
+                    through deception, unauthorized access, compromised
+                    accounts, or other improper means.
+                </p>
+            </section>
+
+
+            <section class="section" id="acceptable-use">
+                <div class="section-header">
+                    <span class="section-number">05</span>
+                    <h2>Acceptable Use</h2>
+                </div>
+
+                <p>You agree not to use Lumnia to:</p>
+
+                <ul>
+                    <li>
+                        violate applicable law, regulation, or Discord
+                        policy;
+                    </li>
+
+                    <li>
+                        harass, threaten, exploit, defraud, or unlawfully
+                        target another person;
+                    </li>
+
+                    <li>
+                        submit unlawful content or content you do not have
+                        the right to process through the Service;
+                    </li>
+
+                    <li>
+                        probe, attack, disrupt, overload, or interfere with
+                        Lumnia or its infrastructure;
+                    </li>
+
+                    <li>
+                        circumvent authorization, permission, rate-limit,
+                        security, or access-control mechanisms;
+                    </li>
+
+                    <li>
+                        use automated systems to abuse or intentionally
+                        degrade the Service;
+                    </li>
+
+                    <li>
+                        impersonate Lumnia, its operator, or another person
+                        in a misleading or fraudulent manner.
+                    </li>
+                </ul>
+
+                <p>
+                    Security research must not involve destructive testing,
+                    unauthorized access, disclosure of private information,
+                    or disruption of the Service.
+                </p>
+            </section>
+
+
+            <section class="section" id="administration">
+                <div class="section-header">
+                    <span class="section-number">06</span>
+                    <h2>Server Administration and Moderation</h2>
+                </div>
+
+                <p>
+                    Lumnia provides tools to assist Discord server
+                    moderation. It does not independently determine a
+                    server's rules or whether a moderation decision is fair,
+                    appropriate, or lawful.
+                </p>
+
+                <p>
+                    Server owners, administrators, and moderators remain
+                    responsible for their communities, moderation policies,
+                    moderation decisions, configuration choices, and use of
+                    information recorded through Lumnia.
+                </p>
+
+                <p>
+                    A moderation record created through Lumnia reflects
+                    information submitted or generated through the
+                    applicable moderation workflow. The existence of a
+                    record does not constitute an independent finding or
+                    endorsement by Lumnia.
+                </p>
+            </section>
+
+
+            <section class="section" id="records">
+                <div class="section-header">
+                    <span class="section-number">07</span>
+                    <h2>Moderation Records and Submitted Content</h2>
+                </div>
+
+                <p>
+                    Authorized users may submit information to Lumnia,
+                    including moderation reasons and related case
+                    information. You are responsible for information you
+                    submit through the Service.
+                </p>
+
+                <p>
+                    You must not intentionally place passwords, access
+                    tokens, payment information, government identification
+                    numbers, or other unnecessary highly sensitive
+                    information into moderation reasons or other free-text
+                    fields.
+                </p>
+
+                <p>
+                    You grant Lumnia permission to process submitted
+                    information as reasonably necessary to operate,
+                    maintain, secure, and provide the Service.
+                </p>
+            </section>
+
+
+            <section class="section" id="privacy">
+                <div class="section-header">
+                    <span class="section-number">08</span>
+                    <h2>Privacy and Data Processing</h2>
+                </div>
+
+                <p>
+                    Lumnia processes limited information required to provide
+                    its moderation functionality. Depending on the feature,
+                    this may include Discord server, user, channel, message,
+                    and interaction identifiers; moderation case data;
+                    moderation reasons; timestamps; server configuration;
+                    and moderation-log delivery state.
+                </p>
+
+                <p>
+                    Additional details about what information Lumnia
+                    processes, why it is processed, retention practices, and
+                    available controls should be described in the
+                    <a href="/privacy">Lumnia Privacy Policy</a>.
+                </p>
+
+                <div class="notice">
+                    Do not interpret this section as a promise that every
+                    category listed here is collected during every use of
+                    Lumnia. Processing depends on the features and actions
+                    involved.
+                </div>
+            </section>
+
+
+            <section class="section" id="availability">
+                <div class="section-header">
+                    <span class="section-number">09</span>
+                    <h2>Service Availability and Reliability</h2>
+                </div>
+
+                <p>
+                    Lumnia is designed with durability and reliable
+                    moderation-log delivery in mind. However, no online
+                    service can guarantee uninterrupted operation,
+                    error-free behavior, or permanent preservation of all
+                    information.
+                </p>
+
+                <p>
+                    Service interruptions may occur because of maintenance,
+                    software defects, infrastructure failures, Discord API
+                    availability, network conditions, security incidents, or
+                    circumstances outside Lumnia's reasonable control.
+                </p>
+
+                <p>
+                    Certain delivery operations may use retry mechanisms.
+                    In uncommon failure scenarios, retries may result in
+                    duplicate moderation-log messages.
+                </p>
+            </section>
+
+
+            <section class="section" id="changes-service">
+                <div class="section-header">
+                    <span class="section-number">10</span>
+                    <h2>Changes to the Service</h2>
+                </div>
+
+                <p>
+                    Lumnia may add, modify, restrict, suspend, or remove
+                    features as the Service evolves.
+                </p>
+
+                <p>
+                    We do not guarantee that a particular command, feature,
+                    integration, interface, or behavior will remain
+                    available indefinitely.
+                </p>
+            </section>
+
+
+            <section class="section" id="termination">
+                <div class="section-header">
+                    <span class="section-number">11</span>
+                    <h2>Suspension and Termination</h2>
+                </div>
+
+                <p>
+                    Access to Lumnia may be restricted or terminated where
+                    reasonably necessary to protect the Service, its users,
+                    third parties, or infrastructure; respond to legal
+                    requirements; investigate abuse; or enforce these Terms.
+                </p>
+
+                <p>
+                    Server administrators may stop using Lumnia by removing
+                    the application from their Discord server.
+                </p>
+
+                <p>
+                    Removal of Lumnia does not necessarily result in
+                    immediate deletion of all associated information.
+                    Applicable retention practices are described in the
+                    Privacy Policy.
+                </p>
+            </section>
+
+
+            <section class="section" id="intellectual-property">
+                <div class="section-header">
+                    <span class="section-number">12</span>
+                    <h2>Intellectual Property</h2>
+                </div>
+
+                <p>
+                    Lumnia, including its branding, original software,
+                    website design, documentation, graphics, and other
+                    original materials, is protected by applicable
+                    intellectual-property laws.
+                </p>
+
+                <p>
+                    These Terms do not grant you ownership of Lumnia or a
+                    right to use Lumnia's branding in a way that falsely
+                    suggests endorsement, partnership, or official
+                    affiliation.
+                </p>
+            </section>
+
+
+            <section class="section" id="third-parties">
+                <div class="section-header">
+                    <span class="section-number">13</span>
+                    <h2>Third-Party Services</h2>
+                </div>
+
+                <p>
+                    Lumnia operates in connection with Discord and may rely
+                    on other infrastructure or service providers.
+                    Third-party products and services are governed by their
+                    respective terms and policies.
+                </p>
+
+                <p>
+                    Lumnia is not responsible for outages, changes,
+                    restrictions, actions, or failures of third-party
+                    services that are outside Lumnia's reasonable control.
+                </p>
+
+                <p>
+                    Unless expressly stated otherwise, Lumnia is not
+                    affiliated with, endorsed by, or sponsored by Discord.
+                </p>
+            </section>
+
+
+            <section class="section" id="disclaimer">
+                <div class="section-header">
+                    <span class="section-number">14</span>
+                    <h2>Disclaimer of Warranties</h2>
+                </div>
+
+                <p>
+                    To the extent permitted by applicable law, the Service
+                    is provided on an "as is" and "as available" basis.
+                </p>
+
+                <p>
+                    No guarantee is made that Lumnia will always be
+                    available, uninterrupted, secure, error-free, or
+                    suitable for every moderation workflow or legal
+                    requirement.
+                </p>
+
+                <p>
+                    Nothing in these Terms excludes warranties or rights
+                    that cannot lawfully be excluded.
+                </p>
+            </section>
+
+
+            <section class="section" id="liability">
+                <div class="section-header">
+                    <span class="section-number">15</span>
+                    <h2>Limitation of Liability</h2>
+                </div>
+
+                <p>
+                    To the maximum extent permitted by applicable law,
+                    Lumnia's operator will not be liable for indirect,
+                    incidental, special, consequential, exemplary, or
+                    punitive damages arising from or relating to use of, or
+                    inability to use, the Service.
+                </p>
+
+                <p>
+                    This includes, where legally permitted, losses resulting
+                    from service interruptions, moderation decisions,
+                    unauthorized server use, lost records, third-party
+                    services, or reliance on information presented through
+                    Lumnia.
+                </p>
+
+                <p>
+                    Some jurisdictions do not allow certain limitations or
+                    exclusions of liability. Where those rules apply, these
+                    limitations apply only to the extent legally permitted.
+                </p>
+            </section>
+
+
+            <section class="section" id="terms-changes">
+                <div class="section-header">
+                    <span class="section-number">16</span>
+                    <h2>Changes to These Terms</h2>
+                </div>
+
+                <p>
+                    These Terms may be updated as Lumnia changes or as
+                    operational, security, legal, or regulatory requirements
+                    evolve.
+                </p>
+
+                <p>
+                    When the Terms are updated, the "Last updated" date at
+                    the top of this page will be revised. Where appropriate,
+                    additional notice may be provided.
+                </p>
+
+                <p>
+                    Continued use of Lumnia after updated Terms become
+                    effective constitutes acceptance of the updated Terms to
+                    the extent permitted by applicable law.
+                </p>
+            </section>
+
+
+            <section class="contact-card" id="contact">
+                <h2>17. Contact</h2>
+
+                <p>
+                    Questions about these Terms or Lumnia can be directed to
+                    the official Lumnia support channel or designated legal
+                    contact.
+                </p>
+
+                <!--
+                    BEFORE PUBLICATION:
+
+                    Replace this with a real contact method, for example:
+
+                    legal@YOUR-LUMNIA-DOMAIN.com
+
+                    Do not publish a fake or unmonitored legal address.
+                -->
+
+                <div class="notice">
+                    <strong>Publication checklist:</strong>
+                    Add Lumnia's official operator/contact information here
+                    before using this page as the application's public Terms
+                    of Service URL.
+                </div>
+            </section>
+
+        </article>
+    </main>
+
+
+    <footer>
+        <div class="footer-inner">
+
+            <div>
+                © <span id="year"></span> Lumnia.
+                All rights reserved.
+            </div>
+
+            <div class="footer-links">
+                <a href="/terms">Terms</a>
+                <a href="/privacy">Privacy</a>
+                <a href="#top">Back to top ↑</a>
+            </div>
+
+        </div>
+    </footer>
+
+
+    <script>
+        (() => {
+            "use strict";
+
+            document.getElementById("year").textContent =
+                new Date().getFullYear();
+
+            const scene = document.getElementById("crystalScene");
+
+            const reducedMotion = window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            );
+
+            if (!reducedMotion.matches && scene) {
+                window.addEventListener(
+                    "pointermove",
+                    (event) => {
+                        const x =
+                            (event.clientX / window.innerWidth - 0.5) * 2;
+
+                        const y =
+                            (event.clientY / window.innerHeight - 0.5) * 2;
+
+                        scene.style.setProperty(
+                            "--rotate-y",
+                            `${x * 5}deg`
+                        );
+
+                        scene.style.setProperty(
+                            "--rotate-x",
+                            `${y * -4}deg`
+                        );
+                    },
+                    { passive: true }
+                );
+            }
+
+            const tiltCards =
+                document.querySelectorAll("[data-tilt]");
+
+            if (!reducedMotion.matches) {
+                tiltCards.forEach((card) => {
+                    card.addEventListener("pointermove", (event) => {
+                        const rect = card.getBoundingClientRect();
+
+                        const x =
+                            (event.clientX - rect.left) / rect.width;
+
+                        const y =
+                            (event.clientY - rect.top) / rect.height;
+
+                        const rotateY = (x - 0.5) * 2.2;
+                        const rotateX = (0.5 - y) * 2.2;
+
+                        card.style.transform =
+                            `perspective(900px)
+                             rotateX(${rotateX}deg)
+                             rotateY(${rotateY}deg)
+                             translateY(-2px)`;
+                    });
+
+                    card.addEventListener("pointerleave", () => {
+                        card.style.transform =
+                            "perspective(900px) rotateX(0) rotateY(0)";
+                    });
+                });
+            }
+        })();
+    </script>
+
 </body>
 </html>
-
