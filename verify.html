@@ -1,66 +1,1103 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Verification Successful | Lumnia</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #0d1117;
-      color: #c9d1d9;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      flex-direction: column;
-      text-align: center;
-    }
+    <meta charset="UTF-8">
 
-    .card {
-      background-color: #161b22;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
-      border: 1px solid #30363d;
-      max-width: 500px;
-    }
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    .emoji {
-      font-size: 4rem;
-    }
+    <meta
+        name="description"
+        content="Connect and verify your Discord account with Lumnia."
+    >
 
-    h1 {
-      color: #58a6ff;
-    }
+    <meta name="theme-color" content="#05070d">
 
-    a {
-      color: #3fb950;
-      text-decoration: none;
-    }
+    <title>Verification | Lumnia</title>
 
-    a:hover {
-      text-decoration: underline;
-    }
+    <style>
+        :root {
+            --bg: #05070d;
+            --surface: rgba(12, 18, 31, 0.68);
+            --surface-strong: rgba(14, 21, 36, 0.88);
 
-    .footer {
-      margin-top: 2rem;
-      font-size: 0.9rem;
-      color: #8b949e;
-    }
-  </style>
+            --border: rgba(148, 185, 255, 0.13);
+            --border-hover: rgba(150, 200, 255, 0.28);
+
+            --text: #f4f7ff;
+            --text-soft: #a7b0c2;
+            --text-muted: #737e92;
+
+            --blue: #82b4ff;
+            --blue-bright: #c0dcff;
+
+            --max-width: 1120px;
+            --radius: 22px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            color: var(--text);
+
+            background:
+                radial-gradient(
+                    circle at 50% -10%,
+                    rgba(61, 116, 210, 0.18),
+                    transparent 34rem
+                ),
+                radial-gradient(
+                    circle at 85% 65%,
+                    rgba(45, 91, 180, 0.07),
+                    transparent 27rem
+                ),
+                var(--bg);
+
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+
+            position: fixed;
+            inset: 0;
+
+            z-index: -2;
+
+            pointer-events: none;
+
+            background-image:
+                linear-gradient(
+                    rgba(255, 255, 255, 0.018) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255, 255, 255, 0.018) 1px,
+                    transparent 1px
+                );
+
+            background-size: 60px 60px;
+
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    rgba(0, 0, 0, 0.75),
+                    transparent 85%
+                );
+        }
+
+        a {
+            color: inherit;
+        }
+
+        /* Navigation */
+
+        nav {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+            right: 0;
+
+            z-index: 100;
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.055);
+
+            background: rgba(5, 7, 13, 0.72);
+
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .nav-inner {
+            width:
+                min(calc(100% - 40px), var(--max-width));
+
+            height: 72px;
+
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+
+            gap: 12px;
+
+            text-decoration: none;
+
+            font-weight: 750;
+            letter-spacing: -0.02em;
+        }
+
+        .brand-mark {
+            position: relative;
+
+            width: 29px;
+            height: 29px;
+
+            transform: rotate(45deg);
+        }
+
+        .brand-mark::before,
+        .brand-mark::after {
+            content: "";
+
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+
+            border-radius: 2px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff,
+                    #8fbfff 48%,
+                    #507ac8
+                );
+
+            box-shadow:
+                0 0 16px
+                rgba(112, 169, 255, 0.55);
+        }
+
+        .brand-mark::before {
+            width: 8px;
+            height: 28px;
+        }
+
+        .brand-mark::after {
+            width: 28px;
+            height: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: var(--text-soft);
+
+            text-decoration: none;
+
+            font-size: 0.9rem;
+
+            transition:
+                color 160ms ease,
+                transform 160ms ease;
+        }
+
+        .nav-links a:hover {
+            color: white;
+
+            transform: translateY(-1px);
+        }
+
+        /* Main */
+
+        main {
+            position: relative;
+
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding:
+                145px 20px 90px;
+
+            perspective: 1200px;
+        }
+
+        .content {
+            position: relative;
+
+            z-index: 5;
+
+            width: 100%;
+            max-width: 760px;
+
+            text-align: center;
+        }
+
+        /* Crystal */
+
+        .scene {
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            width: min(680px, 95vw);
+            height: min(680px, 95vw);
+
+            transform:
+                translate(-50%, -50%)
+                rotateX(var(--rx, 0deg))
+                rotateY(var(--ry, 0deg));
+
+            transform-style: preserve-3d;
+
+            pointer-events: none;
+
+            transition:
+                transform 170ms ease-out;
+        }
+
+        .glow {
+            position: absolute;
+
+            inset: 14%;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(76, 140, 255, 0.16),
+                    rgba(76, 140, 255, 0.035) 45%,
+                    transparent 70%
+                );
+
+            filter: blur(28px);
+
+            transform: translateZ(-100px);
+        }
+
+        .crystal {
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            width: 170px;
+            height: 170px;
+
+            transform:
+                translate(-50%, -50%)
+                rotate(45deg)
+                translateZ(-70px);
+
+            border:
+                1px solid
+                rgba(173, 209, 255, 0.1);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255, 255, 255, 0.025),
+                    rgba(88, 147, 255, 0.055),
+                    rgba(255, 255, 255, 0.008)
+                );
+
+            box-shadow:
+                0 0 100px
+                    rgba(66, 127, 235, 0.12),
+                inset 0 0 45px
+                    rgba(115, 169, 255, 0.04);
+        }
+
+        .crystal::before,
+        .crystal::after {
+            content: "";
+
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            transform:
+                translate(-50%, -50%);
+
+            border:
+                1px solid
+                rgba(181, 215, 255, 0.09);
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(255, 255, 255, 0.1),
+                    rgba(104, 163, 255, 0.018)
+                );
+        }
+
+        .crystal::before {
+            width: 28px;
+            height: 320px;
+        }
+
+        .crystal::after {
+            width: 320px;
+            height: 28px;
+        }
+
+        /* Content */
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+
+            gap: 8px;
+
+            margin-bottom: 22px;
+
+            padding: 7px 12px;
+
+            border:
+                1px solid
+                rgba(129, 174, 255, 0.17);
+
+            border-radius: 999px;
+
+            background:
+                rgba(78, 125, 206, 0.07);
+
+            color: #a9c8fa;
+
+            font-size: 0.7rem;
+            font-weight: 700;
+
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow-dot {
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: #82b4ff;
+
+            box-shadow:
+                0 0 12px
+                    rgba(108, 168, 255, 0.9);
+        }
+
+        h1 {
+            margin: 0;
+
+            font-size:
+                clamp(3.2rem, 9vw, 6.7rem);
+
+            line-height: 0.95;
+
+            letter-spacing: -0.065em;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #ffffff 12%,
+                    #d7e5ff 62%,
+                    #8ba4cc
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+        }
+
+        .description {
+            max-width: 610px;
+
+            margin: 27px auto 0;
+
+            color: var(--text-soft);
+
+            font-size:
+                clamp(1rem, 2vw, 1.13rem);
+
+            line-height: 1.8;
+        }
+
+        /* Verification card */
+
+        .verify-card {
+            position: relative;
+
+            overflow: hidden;
+
+            margin: 42px auto 0;
+
+            padding: 30px;
+
+            max-width: 620px;
+
+            text-align: left;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: var(--radius);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(16, 25, 42, 0.84),
+                    rgba(8, 12, 21, 0.78)
+                );
+
+            box-shadow:
+                0 24px 80px
+                    rgba(0, 0, 0, 0.25);
+
+            backdrop-filter: blur(18px);
+
+            transform-style: preserve-3d;
+
+            transition:
+                transform 180ms ease,
+                border-color 180ms ease;
+        }
+
+        .verify-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 230px;
+            height: 230px;
+
+            top: -140px;
+            right: -80px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(81, 145, 255, 0.14);
+
+            filter: blur(55px);
+
+            pointer-events: none;
+        }
+
+        .card-top {
+            display: flex;
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 23px;
+        }
+
+        .shield {
+            width: 46px;
+            height: 46px;
+
+            flex: 0 0 auto;
+
+            display: grid;
+            place-items: center;
+
+            border:
+                1px solid
+                rgba(139, 185, 255, 0.18);
+
+            border-radius: 14px;
+
+            background:
+                rgba(89, 143, 230, 0.08);
+
+            color: #a8caff;
+
+            font-size: 1.2rem;
+        }
+
+        .card-title {
+            margin: 0 0 4px;
+
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .card-subtitle {
+            margin: 0;
+
+            color: var(--text-muted);
+
+            font-size: 0.82rem;
+        }
+
+        .details {
+            display: grid;
+
+            gap: 10px;
+
+            margin: 0 0 24px;
+        }
+
+        .detail {
+            display: flex;
+            align-items: flex-start;
+
+            gap: 11px;
+
+            color: var(--text-soft);
+
+            font-size: 0.86rem;
+            line-height: 1.6;
+        }
+
+        .check {
+            flex: 0 0 auto;
+
+            margin-top: 2px;
+
+            color: #8dbbff;
+        }
+
+        /* Disabled CTA */
+
+        .button {
+            width: 100%;
+
+            min-height: 49px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 9px;
+
+            border:
+                1px solid
+                rgba(148, 185, 255, 0.11);
+
+            border-radius: 12px;
+
+            background:
+                rgba(82, 126, 198, 0.055);
+
+            color: #77869c;
+
+            font: inherit;
+            font-size: 0.87rem;
+            font-weight: 650;
+
+            cursor: not-allowed;
+
+            user-select: none;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 8px;
+
+            margin-top: 14px;
+
+            color: var(--text-muted);
+
+            font-size: 0.75rem;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: #71829e;
+
+            box-shadow:
+                0 0 8px
+                    rgba(113, 130, 158, 0.45);
+        }
+
+        /* Info cards */
+
+        .info-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 12px;
+
+            max-width: 620px;
+
+            margin: 18px auto 0;
+        }
+
+        .info {
+            padding: 18px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 15px;
+
+            background:
+                rgba(10, 16, 27, 0.55);
+
+            text-align: left;
+        }
+
+        .info strong {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #dfeaff;
+
+            font-size: 0.8rem;
+        }
+
+        .info span {
+            color: var(--text-muted);
+
+            font-size: 0.75rem;
+            line-height: 1.55;
+        }
+
+        /* Footer */
+
+        footer {
+            border-top:
+                1px solid
+                rgba(255, 255, 255, 0.055);
+        }
+
+        .footer-inner {
+            width:
+                min(calc(100% - 40px), var(--max-width));
+
+            min-height: 110px;
+
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 25px;
+
+            color: var(--text-muted);
+
+            font-size: 0.79rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-soft);
+        }
+
+        /* Responsive */
+
+        @media (max-width: 650px) {
+            .nav-inner {
+                height: 64px;
+            }
+
+            .nav-links {
+                gap: 16px;
+            }
+
+            .nav-links a {
+                font-size: 0.82rem;
+            }
+
+            .nav-links a:first-child {
+                display: none;
+            }
+
+            main {
+                padding-top: 120px;
+            }
+
+            .verify-card {
+                padding: 23px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .scene {
+                width: 420px;
+                height: 420px;
+            }
+
+            .footer-inner {
+                padding: 28px 0;
+
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        /* Accessibility */
+
+        :focus-visible {
+            outline: 2px solid #8bb8ff;
+            outline-offset: 4px;
+
+            border-radius: 4px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .scene {
+                transform:
+                    translate(-50%, -50%) !important;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <div class="card">
-    <div class="emoji">✅</div>
-    <h1>Verification Successful</h1>
-    <p>Your Discord account has been verified successfully.</p>
-    <p>Your role will be automatically assigned within a few seconds.</p>
-    <div class="footer">
-      <p><a href="https://discord.com">Return to Discord</a> veya <a href="/">Go to home page</a></p>
+
+<nav>
+    <div class="nav-inner">
+
+        <a
+            class="brand"
+            href="index.html"
+            aria-label="Lumnia home"
+        >
+            <span
+                class="brand-mark"
+                aria-hidden="true"
+            ></span>
+
+            <span>Lumnia</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="terms.html">Terms</a>
+            <a href="privacy.html">Privacy</a>
+        </div>
+
     </div>
-  </div>
+</nav>
+
+
+<main>
+
+    <div
+        class="scene"
+        id="scene"
+        aria-hidden="true"
+    >
+        <div class="glow"></div>
+        <div class="crystal"></div>
+    </div>
+
+
+    <div class="content">
+
+        <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Discord Connection
+        </div>
+
+        <h1>Verify with Lumnia</h1>
+
+        <p class="description">
+            Connect your Discord account to Lumnia when
+            verification becomes available. Verification will use
+            Discord's authorization flow and will require your
+            explicit approval.
+        </p>
+
+
+        <div class="verify-card" data-tilt>
+
+            <div class="card-top">
+
+                <div
+                    class="shield"
+                    aria-hidden="true"
+                >
+                    ✦
+                </div>
+
+                <div>
+                    <p class="card-title">
+                        Discord Verification
+                    </p>
+
+                    <p class="card-subtitle">
+                        Secure connection through Discord
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="details">
+
+                <div class="detail">
+                    <span class="check">✓</span>
+
+                    <span>
+                        Verification will require your explicit
+                        authorization through Discord.
+                    </span>
+                </div>
+
+                <div class="detail">
+                    <span class="check">✓</span>
+
+                    <span>
+                        Lumnia will request only the permissions
+                        required for the verification feature.
+                    </span>
+                </div>
+
+                <div class="detail">
+                    <span class="check">✓</span>
+
+                    <span>
+                        Your Discord password is never entered into
+                        or provided directly to Lumnia.
+                    </span>
+                </div>
+
+            </div>
+
+
+            <!--
+                IMPORTANT:
+
+                Do not turn this into a real authorization button
+                until Lumnia has a proper server-side Discord OAuth2
+                / Linked Roles implementation.
+
+                Never place a Discord client secret in this HTML or
+                in browser-side JavaScript.
+            -->
+
+            <button
+                class="button"
+                type="button"
+                disabled
+                aria-disabled="true"
+            >
+                Verification Coming Soon
+            </button>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                Verification is not currently enabled
+            </div>
+
+        </div>
+
+
+        <div class="info-grid">
+
+            <div class="info">
+                <strong>Authorization</strong>
+
+                <span>
+                    Discord will show what access is being
+                    requested before you approve it.
+                </span>
+            </div>
+
+            <div class="info">
+                <strong>Minimal Access</strong>
+
+                <span>
+                    Verification should request only the scopes
+                    needed to provide the feature.
+                </span>
+            </div>
+
+            <div class="info">
+                <strong>Privacy</strong>
+
+                <span>
+                    Information processed by Lumnia is subject to
+                    the Lumnia Privacy Policy.
+                </span>
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    <div class="footer-inner">
+
+        <div>
+            © <span id="year"></span> Lumnia.
+            All rights reserved.
+        </div>
+
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="terms.html">Terms</a>
+            <a href="privacy.html">Privacy</a>
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script>
+    (() => {
+        "use strict";
+
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+
+        const scene =
+            document.getElementById("scene");
+
+        const reducedMotion =
+            window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            );
+
+        if (!reducedMotion.matches && scene) {
+            window.addEventListener(
+                "pointermove",
+                (event) => {
+                    const x =
+                        (
+                            event.clientX /
+                            window.innerWidth -
+                            0.5
+                        ) * 2;
+
+                    const y =
+                        (
+                            event.clientY /
+                            window.innerHeight -
+                            0.5
+                        ) * 2;
+
+                    scene.style.setProperty(
+                        "--ry",
+                        `${x * 5}deg`
+                    );
+
+                    scene.style.setProperty(
+                        "--rx",
+                        `${y * -4}deg`
+                    );
+                },
+                { passive: true }
+            );
+        }
+
+        const cards =
+            document.querySelectorAll("[data-tilt]");
+
+        if (!reducedMotion.matches) {
+            cards.forEach((card) => {
+
+                card.addEventListener(
+                    "pointermove",
+                    (event) => {
+                        const rect =
+                            card.getBoundingClientRect();
+
+                        const x =
+                            (
+                                event.clientX -
+                                rect.left
+                            ) / rect.width;
+
+                        const y =
+                            (
+                                event.clientY -
+                                rect.top
+                            ) / rect.height;
+
+                        const rotateY =
+                            (x - 0.5) * 2;
+
+                        const rotateX =
+                            (0.5 - y) * 2;
+
+                        card.style.transform =
+                            `perspective(900px)
+                             rotateX(${rotateX}deg)
+                             rotateY(${rotateY}deg)
+                             translateY(-2px)`;
+                    }
+                );
+
+                card.addEventListener(
+                    "pointerleave",
+                    () => {
+                        card.style.transform =
+                            "perspective(900px) " +
+                            "rotateX(0) rotateY(0)";
+                    }
+                );
+
+            });
+        }
+    })();
+</script>
+
 </body>
 </html>
-
-
