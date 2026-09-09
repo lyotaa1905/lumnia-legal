@@ -1,73 +1,1649 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Privacy Policy - Lumnia</title>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Privacy Policy for Lumnia, a Discord moderation bot for durable warning records, case history, and reliable moderation logs."
+    >
+
+    <meta name="theme-color" content="#05070d">
+
+    <title>Privacy Policy | Lumnia</title>
+
     <style>
+        :root {
+            --bg: #05070d;
+            --bg-soft: #080c15;
+            --surface: rgba(12, 18, 31, 0.68);
+            --surface-strong: rgba(14, 21, 36, 0.9);
+
+            --border: rgba(148, 185, 255, 0.13);
+            --border-hover: rgba(150, 200, 255, 0.28);
+
+            --text: #f4f7ff;
+            --text-soft: #a7b0c2;
+            --text-muted: #737e92;
+
+            --blue: #78aaff;
+            --blue-bright: #b8d7ff;
+            --cyan: #79e6ff;
+
+            --max-width: 1120px;
+            --content-width: 790px;
+            --radius: 22px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            background-color: #f4f4f4;
-            color: #333;
-            padding: 2rem;
+            margin: 0;
+            min-height: 100vh;
+
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            color: var(--text);
+
+            background:
+                radial-gradient(
+                    circle at 50% -10%,
+                    rgba(61, 116, 210, 0.17),
+                    transparent 34rem
+                ),
+                radial-gradient(
+                    circle at 90% 25%,
+                    rgba(45, 91, 180, 0.08),
+                    transparent 25rem
+                ),
+                var(--bg);
+
+            overflow-x: hidden;
         }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: #fff;
-            padding: 2rem 3rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+
+            pointer-events: none;
+            z-index: -2;
+
+            background-image:
+                linear-gradient(
+                    rgba(255, 255, 255, 0.018) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255, 255, 255, 0.018) 1px,
+                    transparent 1px
+                );
+
+            background-size: 60px 60px;
+
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    rgba(0, 0, 0, 0.7),
+                    transparent 72%
+                );
         }
-        h1, h2 {
-            color: #2c3e50;
-        }
+
         a {
-            color: #2980b9;
+            color: inherit;
+        }
+
+        /* Navigation */
+
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.055);
+
+            background: rgba(5, 7, 13, 0.72);
+
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .nav-inner {
+            width: min(calc(100% - 40px), var(--max-width));
+            height: 72px;
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+
+            text-decoration: none;
+
+            font-weight: 750;
+            letter-spacing: -0.02em;
+        }
+
+        .brand-mark {
+            position: relative;
+
+            width: 29px;
+            height: 29px;
+
+            transform: rotate(45deg);
+        }
+
+        .brand-mark::before,
+        .brand-mark::after {
+            content: "";
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+
+            border-radius: 2px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff,
+                    #8fbfff 48%,
+                    #507ac8
+                );
+
+            box-shadow:
+                0 0 16px rgba(112, 169, 255, 0.55);
+        }
+
+        .brand-mark::before {
+            width: 8px;
+            height: 28px;
+        }
+
+        .brand-mark::after {
+            width: 28px;
+            height: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: var(--text-soft);
+
+            text-decoration: none;
+
+            font-size: 0.9rem;
+
+            transition:
+                color 160ms ease,
+                transform 160ms ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+            transform: translateY(-1px);
+        }
+
+        .nav-links .active {
+            color: var(--text);
+        }
+
+        /* Hero */
+
+        .hero {
+            position: relative;
+
+            width: min(calc(100% - 40px), var(--max-width));
+            min-height: 530px;
+
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            perspective: 1000px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+
+            max-width: 790px;
+
+            padding: 100px 0 80px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            margin-bottom: 22px;
+            padding: 7px 12px;
+
+            color: #a9c8fa;
+
+            border:
+                1px solid rgba(129, 174, 255, 0.17);
+
+            border-radius: 999px;
+
+            background:
+                rgba(78, 125, 206, 0.07);
+
+            font-size: 0.72rem;
+            font-weight: 700;
+
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow-dot {
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: #82b4ff;
+
+            box-shadow:
+                0 0 12px rgba(108, 168, 255, 0.9);
+        }
+
+        h1 {
+            margin: 0;
+
+            font-size: clamp(3rem, 8vw, 6.4rem);
+            line-height: 0.98;
+
+            letter-spacing: -0.065em;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #ffffff 12%,
+                    #d7e5ff 62%,
+                    #8ba4cc
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+        }
+
+        .hero-description {
+            max-width: 650px;
+
+            margin: 28px auto 0;
+
+            color: var(--text-soft);
+
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            line-height: 1.8;
+        }
+
+        .updated {
+            margin-top: 20px;
+
+            color: var(--text-muted);
+
+            font-size: 0.83rem;
+        }
+
+        /* Crystal */
+
+        .crystal-scene {
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            width: 520px;
+            height: 520px;
+
+            transform:
+                translate(-50%, -50%)
+                rotateX(var(--rotate-x, 0deg))
+                rotateY(var(--rotate-y, 0deg));
+
+            transform-style: preserve-3d;
+
+            pointer-events: none;
+
+            transition:
+                transform 180ms ease-out;
+
+            opacity: 0.48;
+        }
+
+        .crystal-glow {
+            position: absolute;
+            inset: 15%;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(86, 148, 255, 0.16),
+                    rgba(86, 148, 255, 0.04) 42%,
+                    transparent 70%
+                );
+
+            filter: blur(22px);
+
+            transform: translateZ(-80px);
+        }
+
+        .crystal {
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            width: 145px;
+            height: 145px;
+
+            transform:
+                translate(-50%, -50%)
+                rotate(45deg)
+                translateZ(-35px);
+
+            border:
+                1px solid rgba(173, 209, 255, 0.12);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255, 255, 255, 0.035),
+                    rgba(89, 149, 255, 0.07),
+                    rgba(255, 255, 255, 0.01)
+                );
+
+            box-shadow:
+                0 0 70px rgba(64, 124, 230, 0.13),
+                inset 0 0 40px rgba(118, 169, 255, 0.05);
+        }
+
+        .crystal::before,
+        .crystal::after {
+            content: "";
+
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+
+            border:
+                1px solid rgba(175, 211, 255, 0.1);
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(255, 255, 255, 0.12),
+                    rgba(104, 163, 255, 0.025)
+                );
+        }
+
+        .crystal::before {
+            width: 26px;
+            height: 260px;
+        }
+
+        .crystal::after {
+            width: 260px;
+            height: 26px;
+        }
+
+        /* Legal content */
+
+        .legal-shell {
+            width: min(calc(100% - 40px), var(--max-width));
+
+            margin: 0 auto 100px;
+
+            display: grid;
+
+            grid-template-columns:
+                220px minmax(0, var(--content-width));
+
+            gap: 70px;
+
+            justify-content: center;
+        }
+
+        .toc {
+            position: sticky;
+            top: 105px;
+
+            align-self: start;
+        }
+
+        .toc-label {
+            margin-bottom: 14px;
+
+            color: var(--text-muted);
+
+            font-size: 0.7rem;
+            font-weight: 700;
+
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+        }
+
+        .toc a {
+            display: block;
+
+            padding: 7px 0;
+
+            color: #778398;
+
+            text-decoration: none;
+
+            font-size: 0.82rem;
+            line-height: 1.35;
+
+            transition:
+                color 150ms ease,
+                transform 150ms ease;
+        }
+
+        .toc a:hover {
+            color: #dce8ff;
+            transform: translateX(3px);
+        }
+
+        .legal-content {
+            min-width: 0;
+        }
+
+        .intro-card {
+            position: relative;
+
+            overflow: hidden;
+
+            margin-bottom: 22px;
+            padding: 30px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(18, 27, 46, 0.78),
+                    rgba(8, 12, 21, 0.72)
+                );
+
+            box-shadow:
+                0 22px 70px rgba(0, 0, 0, 0.22);
+
+            transform-style: preserve-3d;
+
+            transition:
+                transform 180ms ease,
+                border-color 180ms ease;
+        }
+
+        .intro-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 250px;
+            height: 250px;
+
+            top: -150px;
+            right: -90px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(81, 145, 255, 0.13);
+
+            filter: blur(55px);
+
+            pointer-events: none;
+        }
+
+        .intro-card strong {
+            color: #eaf2ff;
+        }
+
+        .section {
+            position: relative;
+
+            padding: 34px 4px;
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.06);
+
+            scroll-margin-top: 100px;
+        }
+
+        .section-header {
+            display: flex;
+
+            gap: 18px;
+
+            align-items: flex-start;
+
+            margin-bottom: 18px;
+        }
+
+        .section-number {
+            flex: 0 0 auto;
+
+            margin-top: 4px;
+
+            color: #7098d8;
+
+            font-family:
+                "SFMono-Regular",
+                Consolas,
+                "Liberation Mono",
+                monospace;
+
+            font-size: 0.73rem;
+            font-weight: 700;
+        }
+
+        h2 {
+            margin: 0;
+
+            color: #f0f5ff;
+
+            font-size: 1.22rem;
+
+            letter-spacing: -0.02em;
+        }
+
+        p,
+        li {
+            color: var(--text-soft);
+
+            font-size: 0.96rem;
+            line-height: 1.85;
+        }
+
+        p {
+            margin: 0 0 15px;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        ul {
+            margin: 12px 0 16px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin: 7px 0;
+            padding-left: 4px;
+        }
+
+        .legal-content a {
+            color: #a8caff;
+
+            text-decoration-color:
+                rgba(168, 202, 255, 0.3);
+
+            text-underline-offset: 3px;
+        }
+
+        .legal-content a:hover {
+            color: #d8e8ff;
+        }
+
+        .notice {
+            margin-top: 18px;
+
+            padding: 17px 19px;
+
+            border:
+                1px solid rgba(115, 165, 255, 0.13);
+
+            border-radius: 14px;
+
+            background:
+                rgba(78, 126, 207, 0.055);
+
+            color: #9eabc0;
+
+            font-size: 0.88rem;
+            line-height: 1.7;
+        }
+
+        .data-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 12px;
+
+            margin-top: 20px;
+        }
+
+        .data-card {
+            padding: 18px;
+
+            border: 1px solid var(--border);
+            border-radius: 15px;
+
+            background:
+                rgba(12, 18, 31, 0.48);
+        }
+
+        .data-card strong {
+            display: block;
+
+            margin-bottom: 6px;
+
+            color: #e8f1ff;
+
+            font-size: 0.88rem;
+        }
+
+        .data-card span {
+            color: var(--text-muted);
+
+            font-size: 0.81rem;
+            line-height: 1.6;
+        }
+
+        /* Contact */
+
+        .contact-card {
+            margin-top: 42px;
+
+            padding: 30px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(15, 23, 39, 0.85),
+                    rgba(8, 12, 21, 0.72)
+                );
+        }
+
+        .contact-card h2 {
+            margin-bottom: 12px;
+        }
+
+        /* Footer */
+
+        footer {
+            border-top:
+                1px solid rgba(255, 255, 255, 0.055);
+        }
+
+        .footer-inner {
+            width: min(calc(100% - 40px), var(--max-width));
+
+            min-height: 115px;
+
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 30px;
+
+            color: var(--text-muted);
+
+            font-size: 0.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 22px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-soft);
+        }
+
+        /* Responsive */
+
+        @media (max-width: 900px) {
+            .legal-shell {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .toc {
+                display: none;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .nav-inner {
+                height: 64px;
+            }
+
+            .nav-links {
+                gap: 16px;
+            }
+
+            .nav-links a {
+                font-size: 0.82rem;
+            }
+
+            .nav-links a:first-child {
+                display: none;
+            }
+
+            .hero {
+                min-height: 470px;
+            }
+
+            .hero-content {
+                padding: 80px 0 65px;
+            }
+
+            h1 {
+                font-size:
+                    clamp(2.8rem, 16vw, 4.5rem);
+            }
+
+            .crystal-scene {
+                width: 380px;
+                height: 380px;
+            }
+
+            .intro-card,
+            .contact-card {
+                padding: 23px;
+            }
+
+            .section {
+                padding: 29px 2px;
+            }
+
+            .section-header {
+                gap: 12px;
+            }
+
+            .data-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                padding: 28px 0;
+
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        /* Accessibility */
+
+        :focus-visible {
+            outline: 2px solid #8bb8ff;
+            outline-offset: 4px;
+
+            border-radius: 4px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .crystal-scene {
+                transform:
+                    translate(-50%, -50%) !important;
+            }
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <h1>Privacy Policy</h1>
-        <p>Effective date: June 22, 2025</p>
 
-        <p>This privacy policy outlines how the Lumnia Discord bot collects, uses, and protects information obtained through your interaction with the bot.</p>
+<nav class="nav" aria-label="Primary navigation">
+    <div class="nav-inner">
 
-        <h2>1. Information We Collect</h2>
-        <ul>
-            <li>Discord User ID, Username, and Discriminator</li>
-            <li>Server ID and Channel ID where interactions occur</li>
-            <li>Message activity metrics (counts, timestamps)</li>
-            <li>Voice channel activity durations</li>
-            <li>Coin balances, XP, and level progress</li>
-            <li>Daily login and task completions</li>
-        </ul>
+        <a
+            class="brand"
+            href="index.html"
+            aria-label="Lumnia home"
+        >
+            <span
+                class="brand-mark"
+                aria-hidden="true"
+            ></span>
 
-        <h2>2. How We Use Your Data</h2>
-        <p>We use the collected data to:</p>
-        <ul>
-            <li>Track your activity and provide rewards (coins, XP, roles)</li>
-            <li>Show leaderboard statistics</li>
-            <li>Deliver customized content such as market offers and daily missions</li>
-        </ul>
+            <span>Lumnia</span>
+        </a>
 
-        <h2>3. Data Storage & Protection</h2>
-        <p>All data is stored securely using industry-standard encryption and access control. No sensitive data (such as passwords, messages, or email addresses) is collected.</p>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="terms.html">Terms</a>
+            <a class="active" href="privacy.html">Privacy</a>
+        </div>
 
-        <h2>4. Data Sharing</h2>
-        <p>We do <strong>not</strong> sell, rent, or share your data with any third parties. Data is only used internally to enhance your experience with the bot.</p>
-
-        <h2>5. Your Rights</h2>
-        <p>If you wish to have your data removed, you can request deletion via our support channels.</p>
-
-        <h2>6. Changes to This Policy</h2>
-        <p>We may update this policy as necessary. All changes will be reflected on this page with a new effective date.</p>
-
-        <h2>7. Contact</h2>
-        <p>Questions or concerns? Reach us via Discord or by emailing <a href="mailto:yasirshirazi1905@gmail.com">yasirshirazi1905@gmail.com</a>.</p>
     </div>
-</body>
+</nav>
 
+
+<header class="hero" id="top">
+
+    <div
+        class="crystal-scene"
+        id="crystalScene"
+        aria-hidden="true"
+    >
+        <div class="crystal-glow"></div>
+        <div class="crystal"></div>
+    </div>
+
+    <div class="hero-content">
+
+        <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Privacy
+        </div>
+
+        <h1>Privacy Policy</h1>
+
+        <p class="hero-description">
+            A clear explanation of the information Lumnia
+            processes, why it is needed, and how it is handled.
+        </p>
+
+        <div class="updated">
+            Last updated: September 9, 2026
+        </div>
+
+    </div>
+
+</header>
+
+
+<main class="legal-shell">
+
+    <aside class="toc" aria-label="Privacy Policy contents">
+
+        <div class="toc-label">On this page</div>
+
+        <a href="#overview">01. Overview</a>
+        <a href="#information">02. Information We Process</a>
+        <a href="#not-collected">03. What We Don't Intentionally Collect</a>
+        <a href="#usage">04. How Information Is Used</a>
+        <a href="#moderation">05. Moderation Records</a>
+        <a href="#discord">06. Discord</a>
+        <a href="#retention">07. Retention</a>
+        <a href="#removal">08. Server Removal</a>
+        <a href="#security">09. Security</a>
+        <a href="#sharing">10. Sharing</a>
+        <a href="#rights">11. Requests & Controls</a>
+        <a href="#children">12. Children</a>
+        <a href="#international">13. International Processing</a>
+        <a href="#changes">14. Policy Changes</a>
+        <a href="#contact">15. Contact</a>
+
+    </aside>
+
+
+    <article class="legal-content">
+
+        <div class="intro-card" data-tilt>
+
+            <p>
+                This Privacy Policy explains how
+                <strong>Lumnia</strong> processes information
+                when you interact with the Lumnia Discord
+                application, its websites, and related services
+                that reference this Policy.
+            </p>
+
+            <p>
+                Lumnia is designed around a focused moderation
+                workflow. We aim to process only the information
+                reasonably necessary to provide, maintain, secure,
+                and improve that functionality.
+            </p>
+
+        </div>
+
+
+        <section class="section" id="overview">
+
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2>Overview</h2>
+            </div>
+
+            <p>
+                Lumnia provides Discord communities with tools for
+                creating durable warning records, reviewing
+                moderation case history, and delivering moderation
+                logs.
+            </p>
+
+            <p>
+                The information Lumnia processes depends on the
+                feature being used. Lumnia does not need every
+                category of information described in this Policy
+                for every interaction.
+            </p>
+
+        </section>
+
+
+        <section class="section" id="information">
+
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2>Information We Process</h2>
+            </div>
+
+            <p>
+                Depending on the action or feature involved, Lumnia
+                may process and store the following categories of
+                information.
+            </p>
+
+            <div class="data-grid">
+
+                <div class="data-card">
+                    <strong>Discord identifiers</strong>
+                    <span>
+                        Identifiers associated with Discord servers,
+                        members, moderators, channels, interactions,
+                        and relevant messages.
+                    </span>
+                </div>
+
+                <div class="data-card">
+                    <strong>Moderation case information</strong>
+                    <span>
+                        Case numbers, warning reasons, involved
+                        Discord identifiers, and timestamps needed
+                        to maintain moderation history.
+                    </span>
+                </div>
+
+                <div class="data-card">
+                    <strong>Server configuration</strong>
+                    <span>
+                        Settings configured for a Discord server,
+                        such as the destination used for future
+                        moderation-log delivery.
+                    </span>
+                </div>
+
+                <div class="data-card">
+                    <strong>Delivery information</strong>
+                    <span>
+                        Operational state associated with delivering
+                        moderation logs, including delivery status
+                        and identifiers needed to track successful
+                        delivery.
+                    </span>
+                </div>
+
+                <div class="data-card">
+                    <strong>Lifecycle information</strong>
+                    <span>
+                        Timestamps and state needed to determine when
+                        Lumnia was installed, removed, or reinstalled
+                        in a Discord server and to apply retention
+                        rules.
+                    </span>
+                </div>
+
+                <div class="data-card">
+                    <strong>Operational information</strong>
+                    <span>
+                        Limited technical information required to
+                        operate, troubleshoot, secure, and monitor
+                        the Service.
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="notice">
+                A Discord message identifier associated with a
+                moderation-log delivery is not the same thing as
+                storing the contents of ordinary Discord messages.
+            </div>
+
+        </section>
+
+
+        <section class="section" id="not-collected">
+
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <h2>What We Don't Intentionally Collect</h2>
+            </div>
+
+            <p>
+                Lumnia is not designed to create copies of ordinary
+                Discord user profiles or maintain a general archive
+                of server conversations.
+            </p>
+
+            <p>
+                Lumnia does not require Discord's privileged Message
+                Content intent for its current moderation
+                functionality and is not designed to read or archive
+                the contents of ordinary server conversations.
+            </p>
+
+            <p>
+                We do not intentionally ask users to provide
+                passwords, authentication tokens, payment-card
+                details, government identification numbers, or
+                similarly sensitive credentials through moderation
+                reasons or other free-text fields.
+            </p>
+
+            <div class="notice">
+                Server moderators control the text they submit as
+                moderation reasons. They should not place
+                unnecessary sensitive personal information or
+                credentials in those fields.
+            </div>
+
+        </section>
+
+
+        <section class="section" id="usage">
+
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <h2>How Information Is Used</h2>
+            </div>
+
+            <p>
+                Lumnia may process information described in this
+                Policy to:
+            </p>
+
+            <ul>
+                <li>
+                    create and maintain moderation warning records;
+                </li>
+
+                <li>
+                    retrieve moderation cases and member case
+                    history for authorized users;
+                </li>
+
+                <li>
+                    deliver moderation logs to configured Discord
+                    channels;
+                </li>
+
+                <li>
+                    track and retry eligible moderation-log
+                    deliveries;
+                </li>
+
+                <li>
+                    preserve server configuration and enforce
+                    retention behavior;
+                </li>
+
+                <li>
+                    detect, investigate, prevent, and respond to
+                    abuse, errors, or security issues;
+                </li>
+
+                <li>
+                    maintain and improve the reliability of the
+                    Service;
+                </li>
+
+                <li>
+                    comply with applicable legal obligations.
+                </li>
+            </ul>
+
+        </section>
+
+
+        <section class="section" id="moderation">
+
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <h2>Moderation Records</h2>
+            </div>
+
+            <p>
+                Moderation records may contain information submitted
+                by authorized moderators, including a warning reason
+                and identifiers associated with the moderator and
+                affected member.
+            </p>
+
+            <p>
+                Lumnia stores this information so authorized server
+                moderators can maintain and review moderation case
+                history.
+            </p>
+
+            <p>
+                Lumnia does not independently determine whether the
+                statements entered by a moderator are true, fair, or
+                appropriate. Responsibility for moderation decisions
+                and submitted moderation reasons remains with the
+                applicable Discord server and its authorized
+                moderators.
+            </p>
+
+        </section>
+
+
+        <section class="section" id="discord">
+
+            <div class="section-header">
+                <span class="section-number">06</span>
+                <h2>Discord and Third-Party Services</h2>
+            </div>
+
+            <p>
+                Lumnia operates through Discord and receives
+                information made available through Discord's
+                services and APIs as necessary for Lumnia's
+                functionality.
+            </p>
+
+            <p>
+                Your use of Discord is separately governed by
+                Discord's own terms and privacy practices.
+            </p>
+
+            <p>
+                Lumnia may also rely on infrastructure providers
+                necessary to host, secure, monitor, back up, or
+                deliver the Service. Those providers may process
+                limited information on Lumnia's behalf as necessary
+                to provide their services.
+            </p>
+
+        </section>
+
+
+        <section class="section" id="retention">
+
+            <div class="section-header">
+                <span class="section-number">07</span>
+                <h2>Data Retention</h2>
+            </div>
+
+            <p>
+                Information is retained for as long as reasonably
+                necessary to provide Lumnia's functionality, maintain
+                moderation history, operate and secure the Service,
+                satisfy applicable legal obligations, and apply the
+                retention practices described in this Policy.
+            </p>
+
+            <p>
+                Different categories of information may have
+                different retention periods.
+            </p>
+
+            <p>
+                Backup copies may follow a separate lifecycle from
+                live application data. Information deleted from the
+                active application database may remain temporarily
+                in backups until those backups expire or are
+                replaced according to the applicable backup
+                retention process.
+            </p>
+
+        </section>
+
+
+        <section class="section" id="removal">
+
+            <div class="section-header">
+                <span class="section-number">08</span>
+                <h2>When Lumnia Is Removed From a Server</h2>
+            </div>
+
+            <p>
+                When Lumnia determines that it has been removed from
+                a Discord server, the server's associated live
+                application data enters a retention period rather
+                than being deleted immediately.
+            </p>
+
+            <p>
+                The current retention period is
+                <strong>30 days</strong> from the applicable server
+                removal boundary.
+            </p>
+
+            <p>
+                This delay helps protect against accidental removal,
+                temporary service interruptions, and related
+                lifecycle events.
+            </p>
+
+            <p>
+                If Lumnia is validly reinstalled before the
+                applicable retention period expires, the current
+                removal state may be cleared and the server's data
+                may remain available.
+            </p>
+
+            <p>
+                After the retention period expires, eligible live
+                application data associated with the removed server
+                is scheduled for cleanup in accordance with
+                Lumnia's retention process.
+            </p>
+
+            <div class="notice">
+                Backup copies can have a separate retention lifecycle
+                and may not disappear at the exact moment data is
+                removed from the live application database.
+            </div>
+
+        </section>
+
+
+        <section class="section" id="security">
+
+            <div class="section-header">
+                <span class="section-number">09</span>
+                <h2>Security</h2>
+            </div>
+
+            <p>
+                Lumnia uses technical and organizational safeguards
+                intended to protect information against unauthorized
+                access, alteration, disclosure, or destruction.
+            </p>
+
+            <p>
+                These measures may include access controls,
+                permission checks, restricted application
+                credentials, database protections, logging
+                safeguards, container isolation, backup procedures,
+                and other operational security practices.
+            </p>
+
+            <p>
+                No system connected to the internet can guarantee
+                absolute security. Accordingly, Lumnia cannot
+                promise that unauthorized access, data loss, or
+                other security incidents will never occur.
+            </p>
+
+        </section>
+
+
+        <section class="section" id="sharing">
+
+            <div class="section-header">
+                <span class="section-number">10</span>
+                <h2>How Information May Be Shared</h2>
+            </div>
+
+            <p>
+                Lumnia does not need to sell personal information in
+                order to provide its moderation functionality.
+            </p>
+
+            <p>
+                Information may be disclosed or made available in
+                limited circumstances, including:
+            </p>
+
+            <ul>
+                <li>
+                    to infrastructure and service providers acting
+                    on Lumnia's behalf;
+                </li>
+
+                <li>
+                    through Discord when Lumnia performs a requested
+                    moderation or logging function;
+                </li>
+
+                <li>
+                    when required to comply with applicable law,
+                    legal process, or valid governmental requests;
+                </li>
+
+                <li>
+                    when reasonably necessary to investigate abuse,
+                    enforce applicable terms, or protect the rights,
+                    safety, integrity, or security of Lumnia, its
+                    users, or others;
+                </li>
+
+                <li>
+                    in connection with a legitimate organizational
+                    restructuring, acquisition, or transfer of the
+                    Service, subject to applicable law.
+                </li>
+            </ul>
+
+        </section>
+
+
+        <section class="section" id="rights">
+
+            <div class="section-header">
+                <span class="section-number">11</span>
+                <h2>Privacy Requests and Controls</h2>
+            </div>
+
+            <p>
+                Depending on where you live, applicable law may
+                provide rights relating to personal information,
+                such as requesting access, correction, deletion, or
+                other information about processing.
+            </p>
+
+            <p>
+                Because much of Lumnia's information is associated
+                with a particular Discord server and moderation
+                record, requests may require enough information to
+                identify the relevant Discord account, server, or
+                case and to verify that the requester is authorized
+                to make the request.
+            </p>
+
+            <p>
+                Some information may need to be retained where
+                permitted or required for security, fraud
+                prevention, dispute resolution, legal compliance, or
+                other legitimate purposes.
+            </p>
+
+        </section>
+
+
+        <section class="section" id="children">
+
+            <div class="section-header">
+                <span class="section-number">12</span>
+                <h2>Children</h2>
+            </div>
+
+            <p>
+                Lumnia is intended for use through Discord and is
+                not designed as a service directed specifically at
+                children.
+            </p>
+
+            <p>
+                Users must satisfy the requirements applicable to
+                their use of Discord and any minimum-age
+                requirements imposed by applicable law.
+            </p>
+
+        </section>
+
+
+        <section class="section" id="international">
+
+            <div class="section-header">
+                <span class="section-number">13</span>
+                <h2>International Processing</h2>
+            </div>
+
+            <p>
+                Discord communities may operate internationally, and
+                Lumnia's infrastructure or service providers may
+                process information in countries other than the
+                country where a user lives.
+            </p>
+
+            <p>
+                Where applicable law requires specific safeguards
+                for international transfers of personal
+                information, appropriate measures will be used as
+                required.
+            </p>
+
+        </section>
+
+
+        <section class="section" id="changes">
+
+            <div class="section-header">
+                <span class="section-number">14</span>
+                <h2>Changes to This Privacy Policy</h2>
+            </div>
+
+            <p>
+                This Privacy Policy may be updated as Lumnia's
+                functionality, infrastructure, data practices, or
+                legal obligations change.
+            </p>
+
+            <p>
+                When this Policy is updated, the "Last updated" date
+                at the top of the page will be revised. Additional
+                notice may be provided where appropriate.
+            </p>
+
+        </section>
+
+
+        <section class="contact-card" id="contact">
+
+            <h2>15. Contact</h2>
+
+            <p>
+                Privacy questions or requests relating to Lumnia can
+                be directed to the official Lumnia support channel
+                or designated privacy contact.
+            </p>
+
+            <!--
+                BEFORE PUBLICATION:
+
+                Replace this section with a real monitored contact
+                method.
+
+                Example:
+                privacy@YOUR-LUMNIA-DOMAIN.com
+
+                Do not publish an address that does not exist or
+                is not monitored.
+            -->
+
+            <div class="notice">
+                <strong>Publication checklist:</strong>
+                Add Lumnia's official privacy contact before treating
+                this page as the final public Privacy Policy.
+            </div>
+
+        </section>
+
+    </article>
+
+</main>
+
+
+<footer>
+
+    <div class="footer-inner">
+
+        <div>
+            © <span id="year"></span> Lumnia.
+            All rights reserved.
+        </div>
+
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="terms.html">Terms</a>
+            <a href="privacy.html">Privacy</a>
+            <a href="#top">Back to top ↑</a>
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script>
+    (() => {
+        "use strict";
+
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+
+        const scene =
+            document.getElementById("crystalScene");
+
+        const reducedMotion =
+            window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            );
+
+        if (!reducedMotion.matches && scene) {
+            window.addEventListener(
+                "pointermove",
+                (event) => {
+                    const x =
+                        (
+                            event.clientX /
+                            window.innerWidth -
+                            0.5
+                        ) * 2;
+
+                    const y =
+                        (
+                            event.clientY /
+                            window.innerHeight -
+                            0.5
+                        ) * 2;
+
+                    scene.style.setProperty(
+                        "--rotate-y",
+                        `${x * 5}deg`
+                    );
+
+                    scene.style.setProperty(
+                        "--rotate-x",
+                        `${y * -4}deg`
+                    );
+                },
+                { passive: true }
+            );
+        }
+
+        const tiltCards =
+            document.querySelectorAll("[data-tilt]");
+
+        if (!reducedMotion.matches) {
+            tiltCards.forEach((card) => {
+
+                card.addEventListener(
+                    "pointermove",
+                    (event) => {
+                        const rect =
+                            card.getBoundingClientRect();
+
+                        const x =
+                            (
+                                event.clientX -
+                                rect.left
+                            ) / rect.width;
+
+                        const y =
+                            (
+                                event.clientY -
+                                rect.top
+                            ) / rect.height;
+
+                        const rotateY =
+                            (x - 0.5) * 2.2;
+
+                        const rotateX =
+                            (0.5 - y) * 2.2;
+
+                        card.style.transform =
+                            `perspective(900px)
+                             rotateX(${rotateX}deg)
+                             rotateY(${rotateY}deg)
+                             translateY(-2px)`;
+                    }
+                );
+
+                card.addEventListener(
+                    "pointerleave",
+                    () => {
+                        card.style.transform =
+                            "perspective(900px) " +
+                            "rotateX(0) rotateY(0)";
+                    }
+                );
+
+            });
+        }
+    })();
+</script>
+
+</body>
 </html>
