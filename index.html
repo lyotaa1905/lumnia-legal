@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Lumnia is a Discord moderation bot built for durable warning records, case history, and reliable moderation logs."
+    >
+
+    <meta name="theme-color" content="#05070d">
+
+    <title>Lumnia | Discord Moderation</title>
+
+    <style>
+        :root {
+            --bg: #05070d;
+            --surface: rgba(12, 18, 31, 0.64);
+            --border: rgba(148, 185, 255, 0.13);
+            --border-hover: rgba(148, 195, 255, 0.3);
+
+            --text: #f4f7ff;
+            --text-soft: #a7b0c2;
+            --text-muted: #727d91;
+
+            --blue: #83b4ff;
+            --blue-bright: #c1dcff;
+            --cyan: #79e6ff;
+
+            --max-width: 1120px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            color: var(--text);
+
+            background:
+                radial-gradient(
+                    circle at 50% -15%,
+                    rgba(65, 126, 230, 0.2),
+                    transparent 36rem
+                ),
+                radial-gradient(
+                    circle at 85% 60%,
+                    rgba(56, 100, 190, 0.07),
+                    transparent 28rem
+                ),
+                #05070d;
+
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+
+            pointer-events: none;
+            z-index: -2;
+
+            background-image:
+                linear-gradient(
+                    rgba(255, 255, 255, 0.018) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255, 255, 255, 0.018) 1px,
+                    transparent 1px
+                );
+
+            background-size: 60px 60px;
+
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    rgba(0, 0, 0, 0.75),
+                    transparent 82%
+                );
+        }
+
+        a {
+            color: inherit;
+        }
+
+        /* Navigation */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+
+            z-index: 100;
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+            background: rgba(5, 7, 13, 0.68);
+
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .nav-inner {
+            width: min(calc(100% - 40px), var(--max-width));
+            height: 72px;
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            text-decoration: none;
+
+            font-weight: 750;
+            letter-spacing: -0.02em;
+        }
+
+        .mini-mark {
+            position: relative;
+
+            width: 28px;
+            height: 28px;
+
+            transform: rotate(45deg);
+        }
+
+        .mini-mark::before,
+        .mini-mark::after {
+            content: "";
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+
+            border-radius: 2px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff,
+                    #92c1ff 48%,
+                    #537ed0
+                );
+
+            box-shadow:
+                0 0 16px rgba(111, 170, 255, 0.5);
+        }
+
+        .mini-mark::before {
+            width: 8px;
+            height: 27px;
+        }
+
+        .mini-mark::after {
+            width: 27px;
+            height: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 27px;
+        }
+
+        .nav-links a {
+            color: var(--text-soft);
+            text-decoration: none;
+
+            font-size: 0.88rem;
+
+            transition:
+                color 160ms ease,
+                transform 160ms ease;
+        }
+
+        .nav-links a:hover {
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        /* Hero */
+
+        .hero {
+            position: relative;
+
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 130px 20px 90px;
+
+            text-align: center;
+
+            perspective: 1200px;
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 5;
+
+            width: 100%;
+            max-width: 850px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 7px 12px;
+            margin-bottom: 27px;
+
+            border: 1px solid rgba(129, 174, 255, 0.16);
+            border-radius: 999px;
+
+            background: rgba(78, 125, 206, 0.065);
+
+            color: #a9c8fa;
+
+            font-size: 0.7rem;
+            font-weight: 700;
+
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+        }
+
+        .badge-dot {
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: #84b7ff;
+
+            box-shadow:
+                0 0 12px rgba(108, 168, 255, 0.95);
+        }
+
+        h1 {
+            margin: 0;
+
+            font-size: clamp(4.5rem, 14vw, 9rem);
+            line-height: 0.9;
+
+            letter-spacing: -0.075em;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #ffffff 10%,
+                    #d8e7ff 58%,
+                    #849cc3
+                );
+
+            color: transparent;
+
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        .tagline {
+            margin: 27px auto 0;
+
+            max-width: 650px;
+
+            color: var(--text-soft);
+
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            line-height: 1.75;
+        }
+
+        .actions {
+            margin-top: 37px;
+
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+
+            gap: 12px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+
+            min-height: 46px;
+            padding: 0 20px;
+
+            border: 1px solid var(--border);
+            border-radius: 12px;
+
+            background: rgba(14, 21, 36, 0.72);
+
+            color: #dbe9ff;
+
+            text-decoration: none;
+
+            font-size: 0.88rem;
+            font-weight: 650;
+
+            backdrop-filter: blur(15px);
+
+            transition:
+                transform 170ms ease,
+                border-color 170ms ease,
+                background 170ms ease,
+                box-shadow 170ms ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+
+            border-color: var(--border-hover);
+
+            background: rgba(19, 29, 49, 0.86);
+
+            box-shadow:
+                0 12px 35px rgba(0, 0, 0, 0.22);
+        }
+
+        .button-primary {
+            border-color: rgba(153, 194, 255, 0.3);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(93, 149, 238, 0.22),
+                    rgba(60, 104, 185, 0.13)
+                );
+
+            color: white;
+        }
+
+        /* Crystal */
+
+        .scene {
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            width: min(700px, 90vw);
+            height: min(700px, 90vw);
+
+            transform:
+                translate(-50%, -50%)
+                rotateX(var(--rx, 0deg))
+                rotateY(var(--ry, 0deg));
+
+            transform-style: preserve-3d;
+
+            pointer-events: none;
+
+            transition: transform 160ms ease-out;
+        }
+
+        .glow {
+            position: absolute;
+            inset: 14%;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(76, 140, 255, 0.16),
+                    rgba(76, 140, 255, 0.035) 45%,
+                    transparent 70%
+                );
+
+            filter: blur(28px);
+
+            transform: translateZ(-100px);
+        }
+
+        .crystal {
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            width: 180px;
+            height: 180px;
+
+            transform:
+                translate(-50%, -50%)
+                rotate(45deg)
+                translateZ(-60px);
+
+            border: 1px solid rgba(173, 209, 255, 0.1);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255, 255, 255, 0.025),
+                    rgba(88, 147, 255, 0.055),
+                    rgba(255, 255, 255, 0.008)
+                );
+
+            box-shadow:
+                0 0 100px rgba(66, 127, 235, 0.12),
+                inset 0 0 45px rgba(115, 169, 255, 0.04);
+        }
+
+        .crystal::before,
+        .crystal::after {
+            content: "";
+
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+
+            border: 1px solid rgba(181, 215, 255, 0.09);
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(255, 255, 255, 0.1),
+                    rgba(104, 163, 255, 0.018)
+                );
+        }
+
+        .crystal::before {
+            width: 28px;
+            height: 340px;
+        }
+
+        .crystal::after {
+            width: 340px;
+            height: 28px;
+        }
+
+        /* Information cards */
+
+        .section {
+            width: min(calc(100% - 40px), var(--max-width));
+
+            margin: -50px auto 110px;
+
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-title {
+            margin-bottom: 22px;
+
+            color: var(--text-muted);
+
+            text-align: center;
+
+            font-size: 0.7rem;
+            font-weight: 700;
+
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .cards {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 15px;
+        }
+
+        .card {
+            position: relative;
+
+            min-height: 210px;
+
+            padding: 27px;
+
+            overflow: hidden;
+
+            border: 1px solid var(--border);
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(15, 23, 39, 0.78),
+                    rgba(8, 12, 21, 0.68)
+                );
+
+            text-decoration: none;
+
+            transform-style: preserve-3d;
+
+            transition:
+                transform 180ms ease,
+                border-color 180ms ease,
+                background 180ms ease;
+        }
+
+        .card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 150px;
+            height: 150px;
+
+            right: -80px;
+            top: -80px;
+
+            border-radius: 50%;
+
+            background: rgba(82, 146, 255, 0.12);
+
+            filter: blur(45px);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+
+            border-color: var(--border-hover);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(18, 28, 47, 0.86),
+                    rgba(9, 14, 24, 0.76)
+                );
+        }
+
+        .card-number {
+            margin-bottom: 35px;
+
+            color: #6389c8;
+
+            font-family:
+                "SFMono-Regular",
+                Consolas,
+                monospace;
+
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+
+        .card h2 {
+            margin: 0 0 9px;
+
+            font-size: 1.05rem;
+            letter-spacing: -0.02em;
+        }
+
+        .card p {
+            margin: 0;
+
+            color: var(--text-muted);
+
+            font-size: 0.85rem;
+            line-height: 1.65;
+        }
+
+        .arrow {
+            position: absolute;
+
+            right: 25px;
+            bottom: 23px;
+
+            color: #7998c7;
+
+            transition: transform 160ms ease;
+        }
+
+        .card:hover .arrow {
+            transform: translateX(3px);
+        }
+
+        /* Footer */
+
+        footer {
+            border-top:
+                1px solid rgba(255, 255, 255, 0.055);
+        }
+
+        .footer-inner {
+            width: min(calc(100% - 40px), var(--max-width));
+
+            min-height: 110px;
+
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 25px;
+
+            color: var(--text-muted);
+
+            font-size: 0.79rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-soft);
+        }
+
+        /* Responsive */
+
+        @media (max-width: 760px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                margin-top: -15px;
+            }
+
+            .nav-links {
+                gap: 16px;
+            }
+
+            .nav-links a:first-child {
+                display: none;
+            }
+
+            .hero {
+                min-height: 90vh;
+            }
+
+            .footer-inner {
+                padding: 28px 0;
+
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links a {
+                font-size: 0.78rem;
+            }
+
+            .brand span:last-child {
+                display: none;
+            }
+
+            h1 {
+                font-size: clamp(4rem, 24vw, 6rem);
+            }
+        }
+
+        /* Accessibility */
+
+        :focus-visible {
+            outline: 2px solid #8bb8ff;
+            outline-offset: 4px;
+
+            border-radius: 5px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .scene {
+                transform:
+                    translate(-50%, -50%) !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="nav-inner">
+
+        <a class="brand" href="index.html">
+            <span class="mini-mark" aria-hidden="true"></span>
+            <span>Lumnia</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="terms.html">Terms</a>
+            <a href="privacy.html">Privacy</a>
+        </div>
+
+    </div>
+</nav>
+
+
+<main>
+
+    <section class="hero">
+
+        <div class="scene" id="scene" aria-hidden="true">
+            <div class="glow"></div>
+            <div class="crystal"></div>
+        </div>
+
+        <div class="hero-inner">
+
+            <div class="badge">
+                <span class="badge-dot"></span>
+                Discord Moderation
+            </div>
+
+            <h1>Lumnia</h1>
+
+            <p class="tagline">
+                Durable warning records, case history, and reliable
+                moderation logs. Built for communities that take
+                moderation seriously.
+            </p>
+
+            <div class="actions">
+
+                <a
+                    class="button button-primary"
+                    href="terms.html"
+                >
+                    Terms of Service
+                    <span>→</span>
+                </a>
+
+                <a
+                    class="button"
+                    href="privacy.html"
+                >
+                    Privacy Policy
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="section">
+
+        <div class="section-title">
+            Lumnia Resources
+        </div>
+
+        <div class="cards">
+
+            <a class="card" href="terms.html">
+                <div class="card-number">01</div>
+
+                <h2>Terms of Service</h2>
+
+                <p>
+                    The rules and conditions governing access to and
+                    use of Lumnia.
+                </p>
+
+                <span class="arrow">→</span>
+            </a>
+
+
+            <a class="card" href="privacy.html">
+                <div class="card-number">02</div>
+
+                <h2>Privacy Policy</h2>
+
+                <p>
+                    Learn what information Lumnia processes, why it is
+                    needed, and how it is handled.
+                </p>
+
+                <span class="arrow">→</span>
+            </a>
+
+
+            <a class="card" href="verify.html">
+                <div class="card-number">03</div>
+
+                <h2>Verification</h2>
+
+                <p>
+                    Information about Lumnia's Discord verification
+                    and connection experience.
+                </p>
+
+                <span class="arrow">→</span>
+            </a>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+    <div class="footer-inner">
+
+        <div>
+            © <span id="year"></span> Lumnia.
+            All rights reserved.
+        </div>
+
+        <div class="footer-links">
+            <a href="terms.html">Terms</a>
+            <a href="privacy.html">Privacy</a>
+        </div>
+
+    </div>
+</footer>
+
+
+<script>
+    (() => {
+        "use strict";
+
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+
+        const scene = document.getElementById("scene");
+
+        const reducedMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        );
+
+        if (!reducedMotion.matches && scene) {
+            window.addEventListener(
+                "pointermove",
+                (event) => {
+                    const x =
+                        (event.clientX / window.innerWidth - 0.5) * 2;
+
+                    const y =
+                        (event.clientY / window.innerHeight - 0.5) * 2;
+
+                    scene.style.setProperty(
+                        "--ry",
+                        `${x * 5}deg`
+                    );
+
+                    scene.style.setProperty(
+                        "--rx",
+                        `${y * -4}deg`
+                    );
+                },
+                { passive: true }
+            );
+        }
+    })();
+</script>
+
+</body>
+</html>
